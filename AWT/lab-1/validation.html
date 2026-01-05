@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        User name:
+        <input type="text" id="user"><br>
+        password:
+        <input type="text" id="pass">
+        <br>
+        repeat password:
+        <input type="text" id="rpassword">
+        <br>
+        DOB:
+        <input type="date" id="dob">
+        <br>
+        enrollment:
+        <input type="text" id="enroll">
+        <button onclick="submitBtn()">submit</button>
+    </form>
+    <script type="text/javascript">
+        function submitBtn() {
+            name = document.getElementById('user').value;
+            pattern1 = '^[a-zA-z0-9_]{8,}$';
+
+            let r = new RegExp(pattern1);
+
+            if (!r.test(name)) {
+                alert("uaername must be minimum of 8 length")
+            }
+            password = document.getElementById('pass').value;
+            console.log(password)
+            if ((password.value.length() > 12 && password.value.length() < 8)) {
+                alert('password length must be 8-12 characters')
+            }
+            else {
+                pattern2 = '^(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,12}$';
+
+                let r2 = new RegExp(pattern2);
+
+                if (!r2.test(password)) {
+                    alert('password must contain at least 1 digit and 1 special character')
+                }
+            }
+            rpassword = document.getElementById('rpassword').value;
+            if (password != rpassword) {
+                alert("plese enter same password")
+            }
+            calcage()
+            if(age<18){
+                alert("enter proper age")
+            }
+            enrol=document.getElementById("enroll").value
+            pattern5 = '^[0-9_]{11}$'
+            let r2 = new RegExp(pattern5);
+            if(!r2.test(enrol)){
+                alert("enter proper length")
+            }
+        }
+        function calcage() {
+            let DOB = document.getElementById('dob').value
+            DOB = new Date(DOB)
+            let today = new Date();
+            let age = today.getFullYear() - DOB.getFullYear()
+            let monthDiff = today.getMonth() - DOB.getMonth()
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < DOB.getDate())) {
+                age--;
+            }
+            console.log(age)
+            return age;
+        }
+    </script>
+</body>
+
+</html>

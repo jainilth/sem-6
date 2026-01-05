@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="app" />
+    <button onclick="add()">add</button>
+    <div id="result"></div>
+    <script type="text/javascript">
+        let idToUpdate=-1
+        let arr = ['a', 'b']
+        function display() {
+            let a = ''
+            a += "<table>"
+            for (i = 0; i < arr.length; i++) {
+                a += '<tr>'
+                a += '<td>' + arr[i] + '</td>'
+                a += '<td><button onclick="del(' + i + ')">delete</td>'
+                a += '<td><button onclick="ed(' + i + ')">edit</td>'
+                a += '</tr>'
+            }
+            a += '</table>'
+            document.getElementById("result").innerHTML = a
+        }
+        function add() {
+            var a = document.getElementById('app').value
+            if(idToUpdate==-1){
+                arr.push(a)
+                idToUpdate=-1
+            }
+            else{
+                arr[idToUpdate]=a
+            }
+            display()
+            document.getElementById('app').value = ''
+        }
+        function del(i) {
+            arr.splice(i, 1)
+            display()
+        } function ed(i) {
+            document.getElementById('app').value=arr[i]
+            idToUpdate=i
+            display()
+        }
+        display()
+    </script>
+</body>
+
+</html>

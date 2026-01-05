@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" onkeypress="eve(event)" onkeyup="changebg()" id="keyboard"> 
+    <script type="text/javascript">
+        function eve(e){
+            document.body.style.backgroundColor="white"
+            console.log(e.key)
+            if(e.key=='a'||e.key=='e'||e.key=='i'||e.key=='o'||e.key=='u'){
+                console.log("vowel pressed")
+            }
+        }
+        function changebg(){
+            document.body.style.backgroundColor="blue"
+        }
+    </script>
+</body>
+</html>
