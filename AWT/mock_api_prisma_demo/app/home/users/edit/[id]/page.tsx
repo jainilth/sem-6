@@ -1,3 +1,4 @@
+import EditUser from '@/app/actions/edit/EditUser'
 import { users } from '@/app/generated/prisma/browser'
 import { prisma } from '@/app/lib/prisma'
 import Link from 'next/link'
@@ -39,9 +40,10 @@ export default async function UserEdit({
  <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-6">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">Add New User</h2>
-        <form className="space-y-6">
+        <form className="space-y-6" action={EditUser}>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+            <input type="hidden" name='id' defaultValue={data.id}/>
             <input 
               type="text" 
               id="name" 

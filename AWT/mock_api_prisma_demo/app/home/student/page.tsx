@@ -1,18 +1,21 @@
+// "use client"
+
 import React from 'react'
 import Student from '@/types/Student'
 import { Linden_Hill } from 'next/font/google'
 import Link from 'next/link'
-
-const lindenHill = Linden_Hill({ 
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-linden-hill'
+ 
+const lindenHill = Linden_Hill({
+    subsets: ['latin'],
+    weight: '400',
+    variable: '--font-linden-hill'
 })
+
 
 export default async function Students() {
     let data = await fetch('https://6835982dcd78db2058c2552b.mockapi.io/student')
     let posts = await data.json()
-    
+
     return (
         <div className={`${lindenHill.variable} font-sans min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8`}>
             <div className="max-w-6xl mx-auto">
@@ -33,7 +36,7 @@ export default async function Students() {
                             All Students ({posts.length})
                         </h2>
                     </div>
-                    
+
                     <div className="overflow-x-auto">
                         <table className="w-full divide-y divide-gray-200">
                             <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
@@ -53,38 +56,38 @@ export default async function Students() {
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-100">
-                                {posts.map((fac: Student) => (
-                                    <tr 
-                                        key={fac.id}
+                                {posts.map((stu: Student) => (
+                                    <tr
+                                        key={stu.id}
                                         className="hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 transition-all duration-200 group"
                                     >
                                         <td className="px-6 py-5 whitespace-nowrap">
                                             <div className="flex items-center">
                                                 <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center mr-4 shadow-lg group-hover:scale-105 transition-transform">
                                                     <span className="text-xl font-bold text-white">
-                                                        {fac.name.charAt(0).toUpperCase()}
+                                                        {stu.name.charAt(0).toUpperCase()}
                                                     </span>
                                                 </div>
                                                 <div>
                                                     <div className="text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
-                                                        {fac.name}
+                                                        {stu.name}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-5 whitespace-nowrap">
                                             <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm font-mono font-semibold">
-                                                {fac.enrollment}
+                                                {stu.enrollment}
                                             </span>
                                         </td>
                                         <td className="px-6 py-5 whitespace-nowrap text-sm text-gray-600">
                                             <span className="font-mono text-xs bg-slate-100 px-2 py-1 rounded-lg">
-                                                {new Date(fac.createdAt).toLocaleDateString('en-IN')}
+                                                {new Date(stu.createdAt).toLocaleDateString('en-IN')}
                                             </span>
                                         </td>
                                         <td className="px-6 py-5 whitespace-nowrap text-right">
-                                            <Link 
-                                                href={`student/${fac.id}`}
+                                            <Link
+                                                href={`student/${stu.id}`}
                                                 className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 transform"
                                             >
                                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,6 +97,7 @@ export default async function Students() {
                                                 View Details
                                             </Link>
                                         </td>
+                                        {/* <td><button onClick={() => { DeleteUser(stu.id) }}></button></td> */}
                                     </tr>
                                 ))}
                             </tbody>
