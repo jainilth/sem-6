@@ -1,0 +1,58 @@
+prisma client step:-
+
+1:= 
+
+npm install prisma @types/node --save-dev 
+npm install @prisma/client @prisma/adapter-mariadb dotenv
+
+2:=
+
+npx prisma init
+
+3:=
+
+in prisma/schema.prisma
+provider = "mysql"
+
+4:=
+
+set .env settings
+DATABASE_URL="mysql://username:password@localhost:3306/mydb"
+DATABASE_USER="username"
+DATABASE_PASSWORD="password"
+DATABASE_NAME="mydb"
+DATABASE_HOST="localhost"
+DATABASE_PORT=3306
+
+5:=
+
+npm prisma db pull
+
+6:=
+
+npx prisma generate
+
+7:=
+
+import "dotenv/config";
+import { PrismaMariaDb } from '@prisma/adapter-mariadb';
+import { PrismaClient } from '../generated/prisma/client';
+
+const adapter = new PrismaMariaDb({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  connectionLimit: 5
+});
+const prisma = new PrismaClient({ adapter });
+
+export { prisma }
+
+
+prisma push pull
+
+schema changed in model:=
+
+npx prisma db push
+npx prisma generate
